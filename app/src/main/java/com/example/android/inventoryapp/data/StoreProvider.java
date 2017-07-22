@@ -20,7 +20,6 @@ public class StoreProvider extends ContentProvider {
     public static final int ITEMS = 1;
     public static final int ITEMS_ID = 2;
 
-
     // URI matcher to match the incoming uri
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -66,7 +65,7 @@ public class StoreProvider extends ContentProvider {
                 // Uri for a single item
                 // selection and selectionArgs are made from the uri
                 selection = StoreEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
                 // query the database with incoming params
                 cursor = database.query(StoreEntry.TABLE_NAME, projection, selection, selectionArgs,
@@ -117,7 +116,7 @@ public class StoreProvider extends ContentProvider {
         // get writable database
         SQLiteDatabase database = storeDbHelper.getWritableDatabase();
 
-        // insert new item into databse with ContentValues
+        // insert new item into database with ContentValues
         long id = database.insert(StoreEntry.TABLE_NAME, null, values);
 
         // Log when insert failed
@@ -157,21 +156,29 @@ public class StoreProvider extends ContentProvider {
         switch (match) {
             case ITEMS:
                 //update all items
-                return updateItem(values, selection, selectionArgs);
+                return updateItem(uri, values, selection, selectionArgs);
             case ITEMS_ID:
                 // update a single items with id
                 selection = StoreEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return updateItem(values, selection, selectionArgs);
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateItem(uri, values, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
 
-    public int updateItem(ContentValues values, String selection, String[] selectionArgs) {
+    public int updateItem(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        // get writable database
         SQLiteDatabase database = storeDbHelper.getWritableDatabase();
 
-        return database.update(StoreEntry.TABLE_NAME, values, selection, selectionArgs);
+        // update the database
+        int response = database.update(StoreEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        // if data is update. notify the cursor to reload its data.
+        if (response > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return response;
     }
 
     /**
@@ -189,11 +196,12 @@ public class StoreProvider extends ContentProvider {
                 int deletedItems = database.delete(StoreEntry.TABLE_NAME, selection, selectionArgs);
                 if (deletedItems != 0) {
                     getContext().getContentResolver().notifyChange(uri, null);
-                }return deletedItems;
+                }
+                return deletedItems;
             case ITEMS_ID:
                 // Delete a single row specified by Uri
                 selection = StoreEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 int deleted = database.delete(StoreEntry.TABLE_NAME, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return deleted;

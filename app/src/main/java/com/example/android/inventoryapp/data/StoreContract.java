@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 
 public final class StoreContract {
 
-    public void StoreContract(){
+    public void StoreContract() {
     }
 
     //Global variables
@@ -20,7 +20,6 @@ public final class StoreContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     // Path name
     public static final String PATH_ITEMS = "items";
-
 
     public static final class StoreEntry implements BaseColumns {
 
@@ -54,14 +53,7 @@ public final class StoreContract {
         // Price
         public final static String PRODUCT_PRICE = "price";
 
-        // supplier webpage
-        public final static String PRODUCT_SUPP_WEB = "supplierwebsite";
-
-
-
-
-
-
-
+        // supplier email
+        public final static String PRODUCT_SUPP_WEB = "supplieremail";
     }
 }

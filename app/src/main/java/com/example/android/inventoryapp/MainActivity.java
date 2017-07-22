@@ -74,10 +74,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // make ContentValues Object with dummy data
         ContentValues newDummyItem = new ContentValues();
         newDummyItem.put(StoreEntry.PRODUCT_NAME, "Headphone");
-        newDummyItem.put(StoreEntry.PRODUCT_PRICE, 1299);
+        newDummyItem.put(StoreEntry.PRODUCT_PRICE, 12.99);
         newDummyItem.put(StoreEntry.PRODUCT_QUANTITY, 28);
-        newDummyItem.put(StoreEntry.PRODUCT_SUPP_WEB,
-                "https://www.hoofdtelefoonstore.nl/product/510005/category-7422/philips-shk2000-blauw.html");
+        newDummyItem.put(StoreEntry.PRODUCT_SUPP_WEB, "example@mail.com");
 
         // send insert request to contentResolver with dummy data
         Uri resultInsert = getContentResolver().insert(StoreEntry.CONTENT_URI, newDummyItem);

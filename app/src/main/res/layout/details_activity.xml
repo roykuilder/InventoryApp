@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/product_name"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/column_style"
+            android:layout_weight="1"
+            android:text="@string/price" />
+
+        <EditText
+            android:id="@+id/edit_price"
+            style="@style/edit_text_style"
+            android:layout_weight="2"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/column_style"
+            android:layout_weight="1"
+            android:text="@string/supplier" />
+
+        <EditText
+            android:id="@+id/edit_supplier"
+            style="@style/edit_text_style"
+            android:layout_weight="2"
+            android:inputType="textEmailAddress" />
+
+        <ImageButton
+            android:id="@+id/email_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_send_white_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/column_style"
+            android:layout_weight="1"
+            android:text="@string/quantity" />
+
+        <EditText
+            android:id="@+id/edit_quantity"
+            style="@style/edit_text_style"
+            android:layout_weight="2"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_measurement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/column_style"
+            android:layout_width="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/quantity_change" />
+
+        <Button
+            android:id="@+id/change_q_plus"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/change_quantity"
+            style="@style/edit_text_style"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/change_q_min"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textAppearance="?android:textAppearanceMedium" />
+    </LinearLayout>
+</LinearLayout>

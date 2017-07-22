@@ -19,12 +19,13 @@
         <activity
             android:name=".DetailsActivity"
             android:label="@string/activity_details_title"
-            android:theme="@style/details_theme"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/details_theme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DetailsActivity" />
         </activity>
+
         <provider
             android:name=".data.StoreProvider"
             android:authorities="com.example.android.inventoryapp"
