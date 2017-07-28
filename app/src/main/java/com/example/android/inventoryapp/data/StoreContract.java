@@ -55,5 +55,8 @@ public final class StoreContract {
 
         // supplier email
         public final static String PRODUCT_SUPP_WEB = "supplieremail";
+
+        // Image uri
+        public final static String PRODUCT_IMAGE = "uri";
     }
 }

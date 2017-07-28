@@ -5,6 +5,28 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layerType="software"
+            android:background="@drawable/dotted_background"/>
+
+        <TextView
+            android:id="@+id/add_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_image"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+    </RelativeLayout>
+
     <EditText
         android:id="@+id/edit_product_name"
         android:layout_width="match_parent"

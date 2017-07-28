@@ -22,7 +22,8 @@ public class StoreDbHelper extends SQLiteOpenHelper {
                 + StoreEntry.PRODUCT_NAME + " TEXT NOT NULL, "
                 + StoreEntry.PRODUCT_QUANTITY + " INTEGER NOT NULL, "
                 + StoreEntry.PRODUCT_PRICE + " REAL NOT NULL, "
-                + StoreEntry.PRODUCT_SUPP_WEB + " TEXT NOT NULL);";
+                + StoreEntry.PRODUCT_SUPP_WEB + " TEXT NOT NULL,"
+                + StoreEntry.PRODUCT_IMAGE + " TEXT NOT NULL);";
         db.execSQL(SQL_CREATE_ITEMS_TABLE);
     }
 

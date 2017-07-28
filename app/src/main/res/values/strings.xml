@@ -21,6 +21,8 @@
     <string name="supplier">Supplier</string>
     <string name="quantity">Quantity</string>
     <string name="quantity_change">Change Quantity</string>
+    <string name="add_image">Click to add image</string>
+    <string name="no_image">Image is required</string>
 
     <!-- Details Menu -->
     <string name="save">Save</string>
@@ -40,4 +42,5 @@
     <string name="unsaved_data">Discard unsaved data and leave?</string>
     <string name="delete_dialog">Delete this Product?</string>
     <string name="cancel">Cancel</string>
+    <string name="delete_all_entries">Are you sure you want to delete all entries?</string>
 </resources>

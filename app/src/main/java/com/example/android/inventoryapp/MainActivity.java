@@ -4,10 +4,13 @@ import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
@@ -69,21 +72,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().initLoader(0, null, this);
     }
 
-    // Todo: delete method after testing
-    private void insertDummy() {
-        // make ContentValues Object with dummy data
-        ContentValues newDummyItem = new ContentValues();
-        newDummyItem.put(StoreEntry.PRODUCT_NAME, "Headphone");
-        newDummyItem.put(StoreEntry.PRODUCT_PRICE, 12.99);
-        newDummyItem.put(StoreEntry.PRODUCT_QUANTITY, 28);
-        newDummyItem.put(StoreEntry.PRODUCT_SUPP_WEB, "example@mail.com");
-
-        // send insert request to contentResolver with dummy data
-        Uri resultInsert = getContentResolver().insert(StoreEntry.CONTENT_URI, newDummyItem);
-
-        Log.v("A new item was inserted", resultInsert.toString());
-    }
-
     /**
      * makes options menu appear
      */
@@ -101,10 +89,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.insert_dummy:
-                insertDummy();
-                return true;
             case R.id.delete_all:
+                showDeleteConfirmationDialog();
                 // Deletes all data from the database
                 int deleted = getContentResolver().delete(StoreEntry.CONTENT_URI, null, null);
                 return true;
@@ -135,5 +121,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         adapter.swapCursor(null);
+    }
+
+    private void showDeleteConfirmationDialog() {
+        // Show dialog with the choice to delete
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_all_entries);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // When delete is confirmed this sends the command to the resolver
+                int deleted = getContentResolver().delete(StoreEntry.CONTENT_URI, null, null);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
